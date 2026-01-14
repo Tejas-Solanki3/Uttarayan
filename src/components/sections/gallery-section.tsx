@@ -1,17 +1,43 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card } from '../ui/card';
+import { KiteIcon } from '../icons/kite-icon';
 
 gsap.registerPlugin(ScrollTrigger);
+
+type KiteStyle = {
+  top: string;
+  left: string;
+  width: string;
+  height: string;
+  opacity: number;
+  transform: string;
+  color: string;
+};
 
 export default function GallerySection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const galleryImages = PlaceHolderImages.filter(img => img.id.startsWith('gallery-'));
+  const [kiteStyles, setKiteStyles] = useState<KiteStyle[]>([]);
+
+  useEffect(() => {
+    // This effect runs only on the client
+    const styles = Array.from({ length: 20 }, () => ({
+      top: `${gsap.utils.random(0, 100)}%`,
+      left: `${gsap.utils.random(0, 100)}%`,
+      width: `${gsap.utils.random(30, 100)}px`,
+      height: `${gsap.utils.random(30, 100)}px`,
+      opacity: gsap.utils.random(0.05, 0.2),
+      transform: `rotate(${gsap.utils.random(-45, 45)}deg)`,
+      color: `hsl(${gsap.utils.random(20, 60)}, 90%, 60%)`,
+    }));
+    setKiteStyles(styles);
+  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -55,8 +81,15 @@ export default function GallerySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-32 bg-background">
-      <div className="container mx-auto px-4">
+    <section ref={sectionRef} className="py-20 md:py-32 bg-background relative overflow-hidden">
+      {kiteStyles.length > 0 && kiteStyles.map((style, i) => (
+        <KiteIcon
+          key={i}
+          className="absolute pointer-events-none"
+          style={style as React.CSSProperties}
+        />
+      ))}
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold font-headline text-foreground">Moments of Joy</h2>
           <p className="text-lg text-foreground/70 mt-4 max-w-2xl mx-auto">

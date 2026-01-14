@@ -87,6 +87,9 @@ export default function FooterSection() {
         <p className="text-lg md:text-2xl text-foreground/90 max-w-2xl mx-auto">
           May the rising sun of Makar Sankranti fill your life with bright and happy moments.
         </p>
+        <p className="text-sm text-foreground/70 mt-8">
+          Made by Tejas Solanki
+        </p>
       </div>
 
       {/* Floating Kites */}
