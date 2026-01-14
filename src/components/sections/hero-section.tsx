@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { KiteIcon } from '../icons/kite-icon';
@@ -8,17 +8,50 @@ import { ArrowDown } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+type KiteStyle = {
+  '--depth': number;
+  '--rotation': number;
+  top: string;
+  left: string;
+  width: string;
+  height: string;
+  transform: string;
+  opacity: number;
+  color: string;
+};
+
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [kiteStyles, setKiteStyles] = useState<KiteStyle[]>([]);
+
+  useEffect(() => {
+    const styles = Array.from({ length: 120 }, () => {
+      const depth = gsap.utils.random(0.1, 1);
+      return {
+        '--depth': depth,
+        '--rotation': gsap.utils.random(-45, 45),
+        top: `${gsap.utils.random(5, 95)}%`,
+        left: `${gsap.utils.random(5, 95)}%`,
+        width: `${gsap.utils.random(20, 80) * (1.2 - depth)}px`,
+        height: `${gsap.utils.random(20, 80) * (1.2 - depth)}px`,
+        transform: `rotate(${gsap.utils.random(-45, 45)}deg) scale(${1.2 - depth})`,
+        opacity: gsap.utils.mapRange(0.1, 1, 0.1, 0.7, depth),
+        color: `hsl(${gsap.utils.random(20, 60)}, 90%, 60%)`,
+      };
+    });
+    setKiteStyles(styles);
+  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section || kiteStyles.length === 0) return;
 
     const tl = gsap.timeline();
-    const kites = gsap.utils.toArray('.parallax-kite');
-
+    
     const ctx = gsap.context(() => {
+      const kites = gsap.utils.toArray('.parallax-kite');
+      if (kites.length === 0) return;
+
       // Entrance Animation
       tl.from('.hero-title-char', {
         yPercent: 100,
@@ -71,7 +104,7 @@ export default function HeroSection() {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [kiteStyles]);
 
   const titleText = "UTTARAYAN";
 
@@ -81,26 +114,14 @@ export default function HeroSection() {
       className="relative min-h-screen w-full flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-background"
     >
       {/* Parallax Kites */}
-      {[...Array(40)].map((_, i) => {
-        const depth = gsap.utils.random(0.1, 1);
-        return (
+      {kiteStyles.map((style, i) => (
           <KiteIcon
             key={i}
             className="parallax-kite absolute"
-            style={{
-              ['--depth' as string]: depth,
-              ['--rotation' as string]: gsap.utils.random(-45, 45),
-              top: `${gsap.utils.random(5, 95)}%`,
-              left: `${gsap.utils.random(5, 95)}%`,
-              width: `${gsap.utils.random(20, 80) * (1.2 - depth)}px`,
-              height: `${gsap.utils.random(20, 80) * (1.2 - depth)}px`,
-              transform: `rotate(${gsap.utils.random(-45, 45)}deg) scale(${1.2 - depth})`,
-              opacity: gsap.utils.mapRange(0.1, 1, 0.1, 0.7, depth),
-              color: `hsl(${gsap.utils.random(20, 60)}, 90%, 60%)`
-            }}
+            style={style as React.CSSProperties}
           />
         )
-      })}
+      )}
 
       {/* Hero Text Content */}
       <div className="relative z-10">

@@ -1,22 +1,47 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { KiteIcon } from '../icons/kite-icon';
 
 gsap.registerPlugin(ScrollTrigger);
 
+type KiteStyle = {
+  left: string;
+  bottom: string;
+  width: string;
+  height: string;
+  opacity: number;
+  transform: string;
+  color: string;
+};
+
 export default function FooterSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [kiteStyles, setKiteStyles] = useState<KiteStyle[]>([]);
+
+  useEffect(() => {
+    const styles = Array.from({ length: 15 }, () => ({
+      left: `${gsap.utils.random(5, 95)}%`,
+      bottom: `${gsap.utils.random(-20, 20)}%`,
+      width: `${gsap.utils.random(20, 80)}px`,
+      height: `${gsap.utils.random(20, 80)}px`,
+      opacity: gsap.utils.random(0.2, 0.6),
+      transform: `rotate(${gsap.utils.random(-30, 30)}deg)`,
+      color: `hsl(${gsap.utils.random(20, 60)}, 100%, 50%)`,
+    }));
+    setKiteStyles(styles);
+  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    if (!section) return;
-
-    const kites = gsap.utils.toArray<SVGElement>('.footer-kite');
+    if (!section || kiteStyles.length === 0) return;
 
     const ctx = gsap.context(() => {
+      const kites = gsap.utils.toArray<SVGElement>('.footer-kite');
+      if (kites.length === 0) return;
+      
       // Animate background gradient
       gsap.to(section, {
         scrollTrigger: {
@@ -46,7 +71,7 @@ export default function FooterSection() {
 
     }, section);
     return () => ctx.revert();
-  }, []);
+  }, [kiteStyles]);
 
   return (
     <footer 
@@ -66,19 +91,11 @@ export default function FooterSection() {
       </div>
 
       {/* Floating Kites */}
-      {[...Array(15)].map((_, i) => (
+      {kiteStyles.map((style, i) => (
         <KiteIcon
           key={i}
           className="footer-kite absolute text-primary/50"
-          style={{
-            left: `${gsap.utils.random(5, 95)}%`,
-            bottom: `${gsap.utils.random(-20, 20)}%`,
-            width: `${gsap.utils.random(20, 80)}px`,
-            height: `${gsap.utils.random(20, 80)}px`,
-            opacity: gsap.utils.random(0.2, 0.6),
-            transform: `rotate(${gsap.utils.random(-30, 30)}deg)`,
-            color: `hsl(${gsap.utils.random(20, 60)}, 100%, 50%)`
-          }}
+          style={style as React.CSSProperties}
         />
       ))}
     </footer>
