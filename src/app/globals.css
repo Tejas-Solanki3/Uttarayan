@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 210 100% 98%;
+    --background: 0 0% 100%;
     --foreground: 224 71% 4%;
     --card: 0 0% 100%;
     --card-foreground: 224 71% 4%;
@@ -80,5 +80,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .hero-title .hero-title-char {
+    text-shadow: 0 2px 5px hsl(var(--primary) / 0.1);
   }
 }

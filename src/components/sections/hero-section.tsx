@@ -36,17 +36,19 @@ export default function HeroSection() {
         opacity: 0,
         scale: 0.5,
         y: 100,
-        stagger: 0.05,
-        duration: 1,
+        stagger: 0.03,
+        duration: 1.2,
         ease: 'power3.out',
       }, '-=1.2');
 
       // Parallax Scroll Animation for Kites
       kites.forEach(kite => {
         const depth = gsap.getProperty(kite, '--depth') as number;
+        const rotation = gsap.getProperty(kite, '--rotation') as number;
         gsap.to(kite, {
-          y: -200 * depth,
-          x: 100 * depth * (Math.random() > 0.5 ? 1 : -1),
+          y: -400 * depth,
+          x: 200 * depth * (Math.random() > 0.5 ? 1 : -1),
+          rotate: rotation + gsap.utils.random(-20, 20),
           ease: 'none',
           scrollTrigger: {
             trigger: section,
@@ -76,28 +78,29 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative min-h-screen w-full flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-gradient-to-b from-sky-200 via-blue-100 to-background"
+      className="relative min-h-screen w-full flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-background"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 bg-grid-slate-800/[0.05] [mask-image:linear-gradient(to_bottom,white_20%,transparent_100%)]"></div>
-      
       {/* Parallax Kites */}
-      {[...Array(20)].map((_, i) => (
-        <KiteIcon
-          key={i}
-          className="parallax-kite absolute text-primary/70"
-          style={{
-            ['--depth' as string]: gsap.utils.random(0.2, 1),
-            top: `${gsap.utils.random(10, 80)}%`,
-            left: `${gsap.utils.random(5, 95)}%`,
-            width: `${gsap.utils.random(30, 100)}px`,
-            height: `${gsap.utils.random(30, 100)}px`,
-            transform: `rotate(${gsap.utils.random(-45, 45)}deg)`,
-            opacity: gsap.utils.random(0.3, 0.8),
-            color: `hsl(${gsap.utils.random(20, 60)}, 100%, 50%)`
-          }}
-        />
-      ))}
+      {[...Array(40)].map((_, i) => {
+        const depth = gsap.utils.random(0.1, 1);
+        return (
+          <KiteIcon
+            key={i}
+            className="parallax-kite absolute"
+            style={{
+              ['--depth' as string]: depth,
+              ['--rotation' as string]: gsap.utils.random(-45, 45),
+              top: `${gsap.utils.random(5, 95)}%`,
+              left: `${gsap.utils.random(5, 95)}%`,
+              width: `${gsap.utils.random(20, 80) * (1.2 - depth)}px`,
+              height: `${gsap.utils.random(20, 80) * (1.2 - depth)}px`,
+              transform: `rotate(${gsap.utils.random(-45, 45)}deg) scale(${1.2 - depth})`,
+              opacity: gsap.utils.mapRange(0.1, 1, 0.1, 0.7, depth),
+              color: `hsl(${gsap.utils.random(20, 60)}, 90%, 60%)`
+            }}
+          />
+        )
+      })}
 
       {/* Hero Text Content */}
       <div className="relative z-10">
