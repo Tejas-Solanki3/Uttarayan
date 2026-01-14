@@ -25,6 +25,7 @@ export default function HeroSection() {
   const [kiteStyles, setKiteStyles] = useState<KiteStyle[]>([]);
 
   useEffect(() => {
+    // This effect runs only on the client
     const styles = Array.from({ length: 120 }, () => {
       const depth = gsap.utils.random(0.1, 1);
       return {
@@ -91,15 +92,6 @@ export default function HeroSection() {
           },
         });
       });
-      
-      // Animate scroll down indicator
-      gsap.to('.scroll-indicator', {
-        y: 10,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut',
-        duration: 1
-      })
 
     }, section);
 
@@ -114,7 +106,7 @@ export default function HeroSection() {
       className="relative min-h-screen w-full flex flex-col justify-center items-center text-center p-4 overflow-hidden bg-background"
     >
       {/* Parallax Kites */}
-      {kiteStyles.map((style, i) => (
+      {kiteStyles.length > 0 && kiteStyles.map((style, i) => (
           <KiteIcon
             key={i}
             className="parallax-kite absolute"
@@ -135,11 +127,6 @@ export default function HeroSection() {
         <p className="hero-subtitle text-lg md:text-2xl text-foreground/80 mt-4 max-w-2xl mx-auto">
           An immersive digital celebration of the sun's journey and the festival of kites.
         </p>
-      </div>
-
-      <div className="scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground/70">
-        <span className="text-sm tracking-widest">Scroll</span>
-        <ArrowDown className="w-5 h-5" />
       </div>
     </section>
   );
