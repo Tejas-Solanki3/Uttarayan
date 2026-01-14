@@ -70,12 +70,7 @@ export default function MotionTypographySection() {
         {quotes.map((quote, index) => (
           <div key={index} className={`quote-${index} text-center`}>
             <h2 
-              className="text-7xl md:text-9xl lg:text-[12rem] font-black font-headline uppercase"
-              style={{
-                WebkitTextStroke: '2px hsl(var(--foreground))',
-                color: 'transparent',
-                opacity: 0.5,
-              }}
+              className="text-7xl md:text-9xl lg:text-[12rem] font-black font-headline uppercase text-foreground"
             >
               {quote.text}
             </h2>

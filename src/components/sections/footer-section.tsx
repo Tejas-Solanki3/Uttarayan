@@ -22,6 +22,7 @@ export default function FooterSection() {
   const [kiteStyles, setKiteStyles] = useState<KiteStyle[]>([]);
 
   useEffect(() => {
+    // This effect runs only on the client
     const styles = Array.from({ length: 15 }, () => ({
       left: `${gsap.utils.random(5, 95)}%`,
       bottom: `${gsap.utils.random(-20, 20)}%`,
@@ -85,13 +86,13 @@ export default function FooterSection() {
         >
           Happy Makar Sankranti
         </h2>
-        <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mx-auto">
+        <p className="text-lg md:text-2xl text-foreground/90 max-w-2xl mx-auto">
           May the rising sun of Makar Sankranti fill your life with bright and happy moments.
         </p>
       </div>
 
       {/* Floating Kites */}
-      {kiteStyles.map((style, i) => (
+      {kiteStyles.length > 0 && kiteStyles.map((style, i) => (
         <KiteIcon
           key={i}
           className="footer-kite absolute text-primary/50"
