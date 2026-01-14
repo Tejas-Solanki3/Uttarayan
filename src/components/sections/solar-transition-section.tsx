@@ -80,15 +80,6 @@ export default function SolarTransitionSection() {
             <p className="text-lg md:text-xl text-foreground/80 max-w-md">{point.text}</p>
           </div>
         ))}
-         <div className="story-panel-sun absolute top-1/2 -translate-y-1/2 left-0 w-screen h-full flex items-center justify-center -z-10">
-          <div className="relative w-48 h-48 md:w-64 md:h-64 animate-float">
-            <div className="absolute inset-0 bg-primary rounded-full blur-2xl opacity-50"></div>
-            <div 
-              className="absolute inset-2 bg-primary rounded-full"
-              style={{boxShadow: '0 0 60px 10px hsl(var(--primary)), inset 0 0 20px hsl(var(--primary-foreground)/.5)'}}
-            ></div>
-          </div>
-        </div>
       </div>
     </section>
   );

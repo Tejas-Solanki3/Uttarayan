@@ -51,7 +51,7 @@ export default function FooterSection() {
   return (
     <footer 
       ref={sectionRef} 
-      className="relative min-h-screen flex flex-col justify-center items-center text-center p-8 overflow-hidden bg-gradient-to-t from-yellow-900/80 via-orange-800/80 to-background"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center p-8 overflow-hidden bg-gradient-to-t from-yellow-200/80 via-orange-300/80 to-background"
       style={{ backgroundSize: '100% 200%' }}
     >
       <div className="z-10 relative">
@@ -66,7 +66,7 @@ export default function FooterSection() {
       </div>
 
       {/* Floating Kites */}
-      {[...Array(10)].map((_, i) => (
+      {[...Array(15)].map((_, i) => (
         <KiteIcon
           key={i}
           className="footer-kite absolute text-primary/50"
@@ -75,8 +75,9 @@ export default function FooterSection() {
             bottom: `${gsap.utils.random(-20, 20)}%`,
             width: `${gsap.utils.random(20, 80)}px`,
             height: `${gsap.utils.random(20, 80)}px`,
-            opacity: gsap.utils.random(0.1, 0.4),
+            opacity: gsap.utils.random(0.2, 0.6),
             transform: `rotate(${gsap.utils.random(-30, 30)}deg)`,
+            color: `hsl(${gsap.utils.random(20, 60)}, 100%, 50%)`
           }}
         />
       ))}
