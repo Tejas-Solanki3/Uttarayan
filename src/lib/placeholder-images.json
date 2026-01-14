@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "kite-1",
+      "description": "A colorful kite",
+      "imageUrl": "https://images.unsplash.com/photo-1626897954044-79903be49c03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8a2l0ZSUyMGlzb2xhdGVkfGVufDB8fHx8MTc2ODM3MDE5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kite isolated"
+    },
+    {
+      "id": "gallery-1",
+      "description": "Colorful kites filling the sky during a festival",
+      "imageUrl": "https://images.unsplash.com/photo-1705633982756-f7aced8226d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxraXRlcyUyMHNreXxlbnwwfHx8fDE3NjgzNzAxOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kites sky"
+    },
+    {
+      "id": "gallery-2",
+      "description": "A family joyfully celebrating an Indian festival",
+      "imageUrl": "https://images.unsplash.com/photo-1718773128488-eed3345e3ff5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmVzdGl2YWwlMjBmYW1pbHl8ZW58MHx8fHwxNzY4MzcwMTk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "festival family"
+    },
+    {
+      "id": "gallery-3",
+      "description": "Traditional Pongal dish being prepared",
+      "imageUrl": "https://images.unsplash.com/photo-1633975573517-653b02dcae4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwb25nYWwlMjBmb29kfGVufDB8fHx8MTc2ODM3MDE5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pongal food"
+    },
+    {
+      "id": "gallery-4",
+      "description": "People gathered around a Lohri bonfire",
+      "imageUrl": "https://images.unsplash.com/photo-1572380179180-80e7c963b1e1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsb2hyaSUyMGJvbmZpcmV8ZW58MHx8fHwxNzY4MzcwMTk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lohri bonfire"
+    },
+    {
+      "id": "gallery-5",
+      "description": "A decorative structure for Magh Bihu in Assam",
+      "imageUrl": "https://images.unsplash.com/photo-1602020277883-8441715993df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiaWh1JTIwYXNzYW18ZW58MHx8fHwxNzY4MzcwMTk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bihu assam"
+    },
+    {
+      "id": "gallery-6",
+      "description": "A beautiful sunset over a city during a festival",
+      "imageUrl": "https://images.unsplash.com/photo-1667508513577-02d16fdce3ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxmZXN0aXZhbCUyMHN1bnNldHxlbnwwfHx8fDE3NjgzNzAxOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "festival sunset"
+    },
+    {
+      "id": "gallery-7",
+      "description": "Close-up of delicious Indian sweets for a celebration",
+      "imageUrl": "https://images.unsplash.com/photo-1695568181363-af5c78f4d059?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjBzd2VldHN8ZW58MHx8fHwxNzY4MzcwMTk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "indian sweets"
+    },
+    {
+      "id": "gallery-8",
+      "description": "A person skillfully flying a kite",
+      "imageUrl": "https://images.unsplash.com/photo-1712839414079-c6661b07b80f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxraXRlJTIwZmx5aW5nfGVufDB8fHx8MTc2ODM3MDE5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kite flying"
+    }
+  ]
 }

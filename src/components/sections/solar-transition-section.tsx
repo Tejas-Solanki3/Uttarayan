@@ -1,0 +1,95 @@
+"use client";
+
+import React, { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const storyPoints = [
+  {
+    title: 'Solar Transition',
+    text: 'Makar Sankranti marks the day the sun begins its journey into the northern hemisphere, a moment known as Uttarayan.',
+  },
+  {
+    title: 'Harvest Significance',
+    text: 'This transition signals the end of winter and the beginning of the harvest season, a time of abundance and gratitude.',
+  },
+  {
+    title: 'New Beginnings',
+    text: 'Across India, it symbolizes a fresh start, a time to let go of the old and welcome the new with joy and festivities.',
+  }
+];
+
+export default function SolarTransitionSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+    
+    const panels = gsap.utils.toArray<HTMLDivElement>('.story-panel');
+    const trackWidth = track.offsetWidth;
+    const sectionWidth = section.offsetWidth;
+
+    const ctx = gsap.context(() => {
+      // Horizontal scroll animation
+      gsap.to(track, {
+        x: -(trackWidth - sectionWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          end: () => `+=${trackWidth - sectionWidth}`,
+        }
+      });
+      
+      // Animate panels
+      panels.forEach((panel, i) => {
+        gsap.from(panel, {
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: gsap.getTweensOf(track)[0],
+            start: 'left 80%',
+            toggleActions: 'play none none reverse',
+          }
+        });
+      });
+
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden">
+      <div ref={trackRef} className="flex h-full items-center relative w-max">
+        {storyPoints.map((point, index) => (
+          <div 
+            key={index} 
+            className="story-panel flex flex-col justify-center px-12 md:px-24 w-screen md:w-[70vw] lg:w-[50vw] h-full"
+          >
+            <h3 className="text-3xl md:text-5xl font-bold font-headline text-primary mb-4">{point.title}</h3>
+            <p className="text-lg md:text-xl text-foreground/80 max-w-md">{point.text}</p>
+          </div>
+        ))}
+         <div className="story-panel-sun absolute top-1/2 -translate-y-1/2 left-0 w-screen h-full flex items-center justify-center -z-10">
+          <div className="relative w-48 h-48 md:w-64 md:h-64 animate-float">
+            <div className="absolute inset-0 bg-primary rounded-full blur-2xl opacity-50"></div>
+            <div 
+              className="absolute inset-2 bg-primary rounded-full"
+              style={{boxShadow: '0 0 60px 10px hsl(var(--primary)), inset 0 0 20px hsl(var(--primary-foreground)/.5)'}}
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
