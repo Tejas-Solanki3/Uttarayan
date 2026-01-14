@@ -81,9 +81,7 @@ export default function FooterSection() {
       style={{ backgroundSize: '100% 200%' }}
     >
       <div className="z-10 relative">
-        <h2 className="text-5xl md:text-8xl font-black font-headline text-primary mb-4"
-          style={{ textShadow: '0 0 15px hsl(var(--primary) / 0.5)' }}
-        >
+        <h2 className="text-5xl md:text-8xl font-black font-headline text-foreground mb-4">
           Happy Makar Sankranti
         </h2>
         <p className="text-lg md:text-2xl text-foreground/90 max-w-2xl mx-auto">
